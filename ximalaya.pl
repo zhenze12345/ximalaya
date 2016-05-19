@@ -73,7 +73,7 @@ sub get_url {
 	my $ua = LWP::UserAgent->new;
 	my $response = $ua->get($url);
 	if (!$response->is_success) {
-		print "open url $url failed";
+		print "open url $url failed\n";
 		exit 1;
 	}
 
@@ -116,7 +116,7 @@ sub download_m4a {
 sub convert_m4a_to_mp3 {
 	my $title = shift;
 	print "converting $title.m4a to $title.mp3 ...\n";
-	my $ret = system("ffmpeg -loglevel 24 -i $title.m4a -map 0:a -codec:a libmp3lame -q:a 4 -map_metadata -1 $title.mp3");
+	my $ret = system("/usr/local/bin/ffmpeg -loglevel 24 -i $title.m4a -map 0:a -codec:a libmp3lame -q:a 4 -map_metadata -1 $title.mp3");
 	if ($ret != 0) {
 		print "convert $title.m4a to $title.mp3 failed\n";
 		unlink($title.".m4a");
