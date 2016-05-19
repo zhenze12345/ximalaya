@@ -51,7 +51,7 @@ sub get_info {
 	print "fetching audio list ...\n";
 	my $response = $ua->get($url);
 	if (!$response->is_success) {
-		print "open url $url failed";
+		print "open url $url failed\n";
 		exit 1;
 	}
 
@@ -150,7 +150,7 @@ if (@ARGV eq 0) {
 }
 
 my $album_url = $ARGV[0];
-if (@ARGV eq 2) {
+if (@ARGV ge 2) {
 	$filter = $ARGV[1];
 }
 
