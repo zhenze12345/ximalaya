@@ -8,12 +8,17 @@ A multithread version is located here: https://github.com/zhenze12345/fetch-audi
 
 ###Usage
 The parameter <b>url</b> support two types:
+
 1. album page such as http://www.ximalaya.com/45692914/album/6329320
+
 2. sound page such as http://www.ximalaya.com/45692914/sound/27966292 
 
 The parameter <b>filter</b> means the title of sound contain filter
+
 For example:
+
 ./ximalaya.pl http://www.ximalaya.com/11129614/album/2872220 侯景传
+
 will download every the sound with title contain "侯景传"
 
 ###Dependencies
