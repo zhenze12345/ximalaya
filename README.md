@@ -19,7 +19,7 @@ For example:
 
 ./ximalaya.pl http://www.ximalaya.com/11129614/album/2872220 侯景传
 
-will download every the sound with title contain "侯景传"
+will download every sound with title that contain "侯景传"
 
 ###Dependencies
 <a href="https://ffmpeg.org/">FFmpeg</a>
