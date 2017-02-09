@@ -8,8 +8,17 @@ use LWP::Simple 'getstore';
 my %hash;
 my $filter = undef;
 
-sub html_parse
-{
+sub html_parse_sound {
+	my ($tag, $attr, $dtext, $origtext) = @_;
+
+	if ( $tag =~ /^img$/
+		&& defined $attr->{'alt'}
+		&& defined $attr->{'sound_popsrc'} ) {
+		$hash{$attr->{'sound_popsrc'}} = $attr->{'alt'};
+	}
+}
+
+sub html_parse {
 	my ($tag, $attr, $dtext, $origtext) = @_;
 	if($tag =~ /^li$/)
 	{
@@ -46,6 +55,11 @@ sub html_parse
 sub get_info {
 	my $url = shift;
 
+	my $type = "album";
+	if ( $url =~ /https?:\/\/www\.ximalaya\.com\/\d+\/sound\/\d+\/?/ ) {
+		$type = "sound";
+	}
+
 	my $ua = LWP::UserAgent->new;
 	$ua->timeout(10);
 	print "fetching audio list ...\n";
@@ -56,9 +70,16 @@ sub get_info {
 	}
 
 	my $sound_id = undef;
+	my $func;
+	if ( $type eq "album" ) {
+		$func = \&html_parse;
+	}
+	else {
+		$func = \&html_parse_sound;
+	}
 
-	my  $parser = HTML::Parser->new(
-		start_h => [\&html_parse, "tagname, attr"],
+	my $parser = HTML::Parser->new(
+		start_h => [$func, "tagname, attr"],
 	);
 
 	$parser->parse($response->content);
@@ -130,7 +151,7 @@ sub convert_m4a_to_mp3 {
 sub get_mp3 {
 	my $url_list = shift;
 	print "starting downloads ...\n";
-	foreach my $title (keys %$url_list) {
+	foreach my $title (sort keys %$url_list) {
 		my $url = $url_list->{$title};
 		if (-f $title.".mp3") {
 			print "$title.mp3 exists, skip\n";
