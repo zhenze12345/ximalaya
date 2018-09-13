@@ -1,4 +1,5 @@
-#ximalaya
+# ximalaya
+**This project is no longer supported, please use [fetch-audio-from-fm](https://github.com/zhenze12345/fetch-audio-from-fm) instead.**
 
 Download audio file from ximalaya.com, and convert them to mp3.
 
@@ -6,7 +7,7 @@ usage: ./ximalaya.pl url [filter]
 
 A multithread version is located here: https://github.com/zhenze12345/fetch-audio-from-fm/blob/master/ximalaya, it can fetch and convert the audio file faster.
 
-###Usage
+### Usage
 The parameter <b>url</b> support two types:
 
 1. album page such as http://www.ximalaya.com/45692914/album/6329320
@@ -21,7 +22,7 @@ For example:
 
 will download every sound with title that contain "侯景传"
 
-###Dependencies
+### Dependencies
 <a href="https://ffmpeg.org/">FFmpeg</a>
 
 <a href="http://search.cpan.org/~oalders/libwww-perl-6.18/lib/LWP/UserAgent.pm">LWP::UserAgent</a>
